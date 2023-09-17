@@ -1,4 +1,4 @@
-Shader "Unlit/VertexExperiment"
+Shader "Unlit/Static Gradient"
 {
     Properties
     {
@@ -71,8 +71,7 @@ Shader "Unlit/VertexExperiment"
                 // }
                 o.vertex = UnityObjectToClipPos(v.vertex); // Local Space to Clip space
                 o.normal = UnityObjectToWorldNormal(v.normals);
-                o.uv = v.uv0 ;
-                // + _Offset * sin(_Time.y);
+                o.uv = v.uv0;
                 // o.uv = (v.uv0 + _Offset) * _Scale;
                 // o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 

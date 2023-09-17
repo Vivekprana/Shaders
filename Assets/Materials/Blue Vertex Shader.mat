@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Unlit_VertexExperiment
+  m_Name: Blue Vertex Shader
   m_Shader: {fileID: 4800000, guid: 654769fcc64562941b23e83935f379a5, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -26,7 +26,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _ColorEnd: 0
+    - _ColorStart: 1
+    - _Offset: 0.9
     - _Scale: 1
     m_Colors:
-    - _Color: {r: 0.9528302, g: 0.30262837, b: 0.30262837, a: 1}
+    - _Color: {r: 0.111271024, g: 1, b: 0, a: 1}
+    - _ColorA: {r: 1, g: 0, b: 0.049011707, a: 1}
+    - _ColorB: {r: 0, g: 0.10204077, b: 1, a: 1}
   m_BuildTextureStacks: []
