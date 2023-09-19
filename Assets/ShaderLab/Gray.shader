@@ -1,4 +1,4 @@
-Shader "Unlit/Static Gradient"
+Shader "Unlit/Static Gray"
 {
     Properties
     {
@@ -87,12 +87,11 @@ Shader "Unlit/Static Gradient"
             {
                 // Blend between two color s
 
-                
+                float t = i.uv.x;
+                // float4 outColor = lerp( _ColorA, _ColorB, t );
 
-                float t = saturate (inverseLerp(_ColorStart, _ColorEnd, i.uv.x));
-                float4 outColor = lerp( _ColorA, _ColorB, t );
-                return outColor;
-                // return float4(i.uv, 0, 1);
+
+                return t;
             }
             ENDCG
         }

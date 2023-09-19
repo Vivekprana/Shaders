@@ -1,4 +1,4 @@
-Shader "Unlit/Static Gradient"
+Shader "Unlit/Triangle Patterns"
 {
     Properties
     {
@@ -25,6 +25,8 @@ Shader "Unlit/Static Gradient"
             // #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
+
+            #define TAU 6.28318530718
 
             struct appdata
             {
@@ -87,12 +89,13 @@ Shader "Unlit/Static Gradient"
             {
                 // Blend between two color s
 
-                
+                float xOffset = cos(i.uv.y * TAU * 8) *0.01 + _Time.x;
 
-                float t = saturate (inverseLerp(_ColorStart, _ColorEnd, i.uv.x));
-                float4 outColor = lerp( _ColorA, _ColorB, t );
-                return outColor;
-                // return float4(i.uv, 0, 1);
+                float t = float2(cos((i.uv.x + xOffset)* TAU * 5), _Time.x);
+                // float4 outColor = lerp( _ColorA, _ColorB, t );
+
+
+                return t;
             }
             ENDCG
         }
