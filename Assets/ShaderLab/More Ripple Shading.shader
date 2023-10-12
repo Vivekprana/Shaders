@@ -1,4 +1,4 @@
-Shader "Unlit/Vertex"
+Shader "Unlit/MoreRipple"
 {
     Properties
     {
@@ -60,16 +60,29 @@ Shader "Unlit/Vertex"
             float _ColorEnd;
             float _WaveAmp;
 
+            float GetWave(float2 uv) {
+                float2 uvsCentered = uv * 2-1;
+                float radialDistance = length(uvsCentered);
+                
+
+                float wave = cos((radialDistance - _Time.y *0.1 )* TAU * 5) *0.5 + 0.5;
+
+                wave *= 1- radialDistance;
+                return wave;
+
+            }
+
             v2f vert (appdata v)
             {
                 v2f o;
+                v.vertex.y =GetWave(v.uv0);
 
 
 
-                float wave = cos((v.uv0.y - _Time.y *0.1 )* TAU * 5);
-                float wave2 = cos((v.uv0.x - _Time.y *0.1 )* TAU * 5);
+                // float wave = cos((v.uv0.y - _Time.y *0.1 )* TAU * 5);
+                // float wave2 = cos((v.uv0.x - _Time.y *0.1 )* TAU * 5);
 
-                v.vertex.y = wave*wave2 * _WaveAmp;
+                // v.vertex.y = wave*wave2 * _WaveAmp;
                 o.vertex = UnityObjectToClipPos(v.vertex); // Local Space to Clip space
                 o.normal = UnityObjectToWorldNormal(v.normals);
                 o.uv = v.uv0;
@@ -84,27 +97,15 @@ Shader "Unlit/Vertex"
                 return (v-a)/(b-a);
             }
 
+            
+
             fixed4 frag (v2f i) : SV_Target
             {
                 // Blend between two color s
+                return GetWave(i.uv);
 
+    
 
-                // float xOffset = cos(i.uv.x * TAU * 8 ) * 0.01;
-                float t = cos((i.uv.y - _Time.y *0.1 )* TAU * 5)*0.5 + 0.5;
-
-                
-                // float4 outColor = lerp( _ColorA, _ColorB, t );
-                t *= 1-i.uv.y - 0.05;
-                return t;
-                float topBottomRemover = (abs(i.normal.y) < 0.999);
-
-                float waves = t * topBottomRemover;
-                float4 gradient = lerp( _ColorA, _ColorB, i.uv.y);
-
-                return gradient * waves;
-
-
-                // return t * ; // abs > .9999 removes top part of mesh and bottom part;
             }
             ENDCG
         }

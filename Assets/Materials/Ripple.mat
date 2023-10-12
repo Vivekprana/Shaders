@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Vertex Offset Material
-  m_Shader: {fileID: 4800000, guid: 2b9af8e352fb4404fa361794e7cc3533, type: 3}
+  m_Name: Ripple
+  m_Shader: {fileID: 4800000, guid: eb366fe0a64d4504898bfdfb83e09e68, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -24,9 +24,7 @@ Material:
     m_Floats:
     - _ColorEnd: 0
     - _ColorStart: 1
-    - _Offset: 0
-    - _Scale: 1
-    - _WaveAmp: 0.12
+    - _WaveAmp: 0.053
     m_Colors:
     - _ColorA: {r: 1, g: 1, b: 1, a: 1}
     - _ColorB: {r: 1, g: 1, b: 1, a: 1}

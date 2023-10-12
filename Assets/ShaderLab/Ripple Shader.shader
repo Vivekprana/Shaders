@@ -1,4 +1,4 @@
-Shader "Unlit/Vertex"
+Shader "Unlit/Ripple"
 {
     Properties
     {
@@ -66,10 +66,10 @@ Shader "Unlit/Vertex"
 
 
 
-                float wave = cos((v.uv0.y - _Time.y *0.1 )* TAU * 5);
-                float wave2 = cos((v.uv0.x - _Time.y *0.1 )* TAU * 5);
+                // float wave = cos((v.uv0.y - _Time.y *0.1 )* TAU * 5);
+                // float wave2 = cos((v.uv0.x - _Time.y *0.1 )* TAU * 5);
 
-                v.vertex.y = wave*wave2 * _WaveAmp;
+                // v.vertex.y = wave*wave2 * _WaveAmp;
                 o.vertex = UnityObjectToClipPos(v.vertex); // Local Space to Clip space
                 o.normal = UnityObjectToWorldNormal(v.normals);
                 o.uv = v.uv0;
@@ -88,23 +88,17 @@ Shader "Unlit/Vertex"
             {
                 // Blend between two color s
 
-
-                // float xOffset = cos(i.uv.x * TAU * 8 ) * 0.01;
-                float t = cos((i.uv.y - _Time.y *0.1 )* TAU * 5)*0.5 + 0.5;
-
+                float2 uvsCentered = i.uv * 2-1;
+                float radialDistance = length(uvsCentered);
                 
-                // float4 outColor = lerp( _ColorA, _ColorB, t );
-                t *= 1-i.uv.y - 0.05;
-                return t;
-                float topBottomRemover = (abs(i.normal.y) < 0.999);
 
-                float waves = t * topBottomRemover;
-                float4 gradient = lerp( _ColorA, _ColorB, i.uv.y);
+                float wave = cos((radialDistance - _Time.y *0.1 )* TAU * 5) *0.5 + 0.5;
 
-                return gradient * waves;
+                wave *= 1- radialDistance;
+                return wave;
 
 
-                // return t * ; // abs > .9999 removes top part of mesh and bottom part;
+
             }
             ENDCG
         }
